@@ -1,5 +1,3 @@
-import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -14,14 +12,18 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import useCurrentTeam from '@/hooks/useCurrentTeam';
 import { dashboard } from '@/routes';
+import projects from '@/routes/projects';
 import type { NavItem } from '@/types';
+import { Link } from '@inertiajs/react';
+import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
 
 export function AppSidebar() {
-    const page = usePage();
-    const dashboardUrl = page.props.currentTeam
-        ? dashboard(page.props.currentTeam.slug)
-        : '/';
+    const currentTeam = useCurrentTeam();
+
+    const dashboardUrl = dashboard(currentTeam.slug);
+    const projectsUrl = projects.index(currentTeam.slug);
 
     const mainNavItems: NavItem[] = [
         {
@@ -29,6 +31,11 @@ export function AppSidebar() {
             href: dashboardUrl,
             icon: LayoutGrid,
         },
+        {
+            title: 'Projects',
+            href: projectsUrl,
+            icon: LayoutGrid,
+        }
     ];
 
     const footerNavItems: NavItem[] = [
