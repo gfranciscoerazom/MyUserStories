@@ -43,6 +43,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    #[Authorize('create', Project::class)]
     public function store(StoreProjectRequest $request, Team $current_team)
     {
         DB::transaction(fn () => $current_team
@@ -67,16 +68,25 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
+    #[Authorize('view', ['project'])]
     public function show(Team $current_team, Project $project)
     {
+        $user_stories = $project
+            ->userStories()
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
         return Inertia::render('projects/show', [
             'project' => $project,
+            'user_stories' => Inertia::scroll(fn () => $user_stories),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
+    #[Authorize('update', ['project'])]
     public function edit(Team $current_team, Project $project)
     {
         return Inertia::render('projects/edit', [
@@ -87,6 +97,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    #[Authorize('update', ['project'])]
     public function update(UpdateProjectRequest $request, Team $current_team, Project $project)
     {
         $project->update($request->safe()->all());
@@ -102,6 +113,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    #[Authorize('delete', ['project'])]
     public function destroy(Team $current_team, Project $project)
     {
         $project->delete();
