@@ -38,10 +38,10 @@ class Project extends Model
     /**
      * Get the user stories for this project.
      *
-     * @return HasMany<UserStorie>
+     * @return HasMany<UserStory>
      */
     public function userStories(): HasMany
     {
-        return $this->hasMany(UserStorie::class);
+        return $this->hasMany(UserStory::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\UserStorieStatus;
+use App\Enums\UserStoryStatus;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('user_stories', function (Blueprint $table) {
             $table->id();
             $table->text('story');
-            $table->enum('status', UserStorieStatus::cases())
-                ->default(UserStorieStatus::TODO->value);
+            $table->enum('status', UserStoryStatus::cases())
+                ->default(UserStoryStatus::TODO->value);
             $table->foreignIdFor(Project::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
             $table->timestamps();

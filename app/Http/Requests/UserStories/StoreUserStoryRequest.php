@@ -2,21 +2,19 @@
 
 namespace App\Http\Requests\UserStories;
 
-use App\Enums\UserStorieStatus;
-use App\Models\UserStorie;
+use App\Models\UserStory;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
-class StoreUserStorieRequest extends FormRequest
+class StoreUserStoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::user()->can('create', UserStorie::class);
+        return Auth::user()->can('create', UserStory::class);
     }
 
     /**

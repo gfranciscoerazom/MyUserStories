@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use App\Enums\UserStorieStatus;
-use Database\Factories\UserStorieFactory;
+use App\Enums\UserStoryStatus;
+use Database\Factories\UserStoryFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable(['story', 'status', 'project_id', 'user_id'])]
-class UserStorie extends Model
+class UserStory extends Model
 {
-    /** @use HasFactory<UserStorieFactory> */
+    /** @use HasFactory<UserStoryFactory> */
     use HasFactory;
 
     public function project(): BelongsTo
@@ -28,7 +28,7 @@ class UserStorie extends Model
     protected function casts(): array
     {
         return [
-            'status' => UserStorieStatus::class,
+            'status' => UserStoryStatus::class,
         ];
     }
 }

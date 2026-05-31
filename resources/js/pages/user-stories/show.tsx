@@ -8,12 +8,12 @@ import { Project, UserStory } from '@/types';
 import { Form, Head, Link } from '@inertiajs/react';
 import { ArrowLeft, Pencil, Trash } from 'lucide-react';
 
-export default function UserStoryShow({ project, user_storie }: { project: Project; user_storie: UserStory; }) {
+export default function UserStoryShow({ project, user_story }: { project: Project; user_story: UserStory; }) {
     const currentTeam = useCurrentTeam();
 
     return (
         <>
-            <Head title={user_storie.story.substring(0, 50)} />
+            <Head title={user_story.story.substring(0, 50)} />
 
             <h1 className="sr-only">User story</h1>
 
@@ -27,7 +27,7 @@ export default function UserStoryShow({ project, user_storie }: { project: Proje
                     </Button>
                     <div className="flex items-center gap-4">
                         <Button asChild>
-                            <Link href={projects.userStories.edit({ current_team: currentTeam.slug, project: project.id, userStorie: user_storie.id })} prefetch>
+                            <Link href={projects.userStories.edit({ current_team: currentTeam.slug, project: project.id, userStory: user_story.id })} prefetch>
                                 <Pencil />
                                 Edit story
                             </Link>
@@ -46,7 +46,7 @@ export default function UserStoryShow({ project, user_storie }: { project: Proje
                                         This action cannot be undone. The user story will be removed from the project.
                                     </DialogDescription>
                                 </DialogHeader>
-                                <Form {...projects.userStories.destroy.form({ current_team: currentTeam.slug, project: project.id, userStorie: user_storie.id })}>
+                                <Form {...projects.userStories.destroy.form({ current_team: currentTeam.slug, project: project.id, userStory: user_story.id })}>
                                     <DialogFooter>
                                         <Button variant="destructive" type="submit">
                                             Delete
@@ -64,14 +64,14 @@ export default function UserStoryShow({ project, user_storie }: { project: Proje
                 <Heading
                     variant="default"
                     title="User Story"
-                    description={user_storie.story}
+                    description={user_story.story}
                 />
             </div>
         </>
     );
 }
 
-UserStoryShow.layout = (props: { currentTeam?: { slug: string; } | null; project: Project; user_storie: UserStory; }) => ({
+UserStoryShow.layout = (props: { currentTeam?: { slug: string; } | null; project: Project; user_story: UserStory; }) => ({
     breadcrumbs: [
         {
             title: 'Projects',
@@ -83,7 +83,7 @@ UserStoryShow.layout = (props: { currentTeam?: { slug: string; } | null; project
         },
         {
             title: 'User story',
-            href: props.currentTeam ? projects.userStories.show({ current_team: props.currentTeam.slug, project: props.project.id, userStorie: props.user_storie.id }) : home(),
+            href: props.currentTeam ? projects.userStories.show({ current_team: props.currentTeam.slug, project: props.project.id, userStory: props.user_story.id }) : home(),
         },
     ],
 });

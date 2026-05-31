@@ -2,16 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Enums\UserStorieStatus;
+use App\Enums\UserStoryStatus;
 use App\Models\Project;
 use App\Models\User;
-use App\Models\UserStorie;
+use App\Models\UserStory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<UserStorie>
+ * @extends Factory<UserStory>
  */
-class UserStorieFactory extends Factory
+class UserStoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class UserStorieFactory extends Factory
     {
         return [
             'story' => fake()->paragraph(),
-            'status' => fake()->randomElement(UserStorieStatus::values()),
+            'status' => fake()->randomElement(UserStoryStatus::values()),
             'project_id' => Project::factory(),
             'user_id' => User::factory(),
         ];

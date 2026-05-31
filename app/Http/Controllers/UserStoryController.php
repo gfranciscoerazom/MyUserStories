@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserStories\StoreUserStorieRequest;
-use App\Http\Requests\UserStories\UpdateUserStorieRequest;
+use App\Http\Requests\UserStories\StoreUserStoryRequest;
+use App\Http\Requests\UserStories\UpdateUserStoryRequest;
 use App\Models\Project;
 use App\Models\Team;
-use App\Models\UserStorie;
+use App\Models\UserStory;
 use Illuminate\Routing\Attributes\Controllers\Authorize;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
-class UserStorieController extends Controller
+class UserStoryController extends Controller
 {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserStorieRequest $request, Team $current_team, Project $project)
+    public function store(StoreUserStoryRequest $request, Team $current_team, Project $project)
     {
         DB::transaction(fn () => $project->userStories()->create(
             $request->safe()->merge([
@@ -36,34 +36,34 @@ class UserStorieController extends Controller
     /**
      * Display the specified resource.
      */
-    #[Authorize('view', ['userStorie'])]
-    public function show(Team $current_team, Project $project, UserStorie $userStorie)
+    #[Authorize('view', ['userStory'])]
+    public function show(Team $current_team, Project $project, UserStory $userStory)
     {
         return Inertia::render('user-stories/show', [
             'project' => $project,
-            'user_storie' => $userStorie,
+            'user_story' => $userStory,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    #[Authorize('update', ['userStorie'])]
-    public function edit(Team $current_team, Project $project, UserStorie $userStorie)
+    #[Authorize('update', ['userStory'])]
+    public function edit(Team $current_team, Project $project, UserStory $userStory)
     {
         return Inertia::render('user-stories/edit', [
             'project' => $project,
-            'user_storie' => $userStorie,
+            'user_story' => $userStory,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    #[Authorize('update', ['userStorie'])]
-    public function update(UpdateUserStorieRequest $request, Team $current_team, Project $project, UserStorie $userStorie)
+    #[Authorize('update', ['userStory'])]
+    public function update(UpdateUserStoryRequest $request, Team $current_team, Project $project, UserStory $userStory)
     {
-        $userStorie->update($request->safe()->all());
+        $userStory->update($request->safe()->all());
 
         Inertia::flash('toast', [
             'type' => 'success',
@@ -76,10 +76,10 @@ class UserStorieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    #[Authorize('delete', ['userStorie'])]
-    public function destroy(Team $current_team, Project $project, UserStorie $userStorie)
+    #[Authorize('delete', ['userStory'])]
+    public function destroy(Team $current_team, Project $project, UserStory $userStory)
     {
-        $userStorie->delete();
+        $userStory->delete();
 
         Inertia::flash('toast', [
             'type' => 'success',

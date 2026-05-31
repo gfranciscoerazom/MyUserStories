@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\UserStories;
 
-use App\Enums\UserStorieStatus;
+use App\Enums\UserStoryStatus;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class UpdateUserStorieRequest extends FormRequest
+class UpdateUserStoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check() && Auth::user()->can('update', $this->userStorie);
+        return Auth::check() && Auth::user()->can('update', $this->userStory);
     }
 
     /**
@@ -27,7 +27,7 @@ class UpdateUserStorieRequest extends FormRequest
     {
         return [
             'story' => ['required', 'string', 'min:10'],
-            'status' => ['required', Rule::in(UserStorieStatus::values())],
+            'status' => ['required', Rule::in(UserStoryStatus::values())],
         ];
     }
 }

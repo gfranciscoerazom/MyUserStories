@@ -124,7 +124,7 @@ export default function ProjectShow({ project, user_stories }: { project: Projec
                                 {
                                     user_stories.data.map((story) => (
                                         <Item key={story.id} variant="outline" asChild>
-                                            <Link href={projects.userStories.show({ current_team: currentTeam.slug, project: project.id, userStorie: story.id })} prefetch>
+                                            <Link href={projects.userStories.show({ current_team: currentTeam.slug, project: project.id, userStory: story.id })} prefetch>
                                                 <ItemMedia variant="icon">
                                                     <CircleDashed />
                                                 </ItemMedia>

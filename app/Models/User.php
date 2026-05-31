@@ -35,11 +35,11 @@ class User extends Authenticatable implements PasskeyUser
     /**
      * Get all user stories created by this user.
      *
-     * @return HasMany<UserStorie>
+     * @return HasMany<UserStory>
      */
     public function userStories(): HasMany
     {
-        return $this->hasMany(UserStorie::class);
+        return $this->hasMany(UserStory::class);
     }
 
     /**

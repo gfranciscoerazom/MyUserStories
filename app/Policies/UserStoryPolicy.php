@@ -3,9 +3,9 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\UserStorie;
+use App\Models\UserStory;
 
-class UserStoriePolicy
+class UserStoryPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,9 +18,9 @@ class UserStoriePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, UserStorie $userStorie): bool
+    public function view(User $user, UserStory $userStory): bool
     {
-        return $user->belongsToTeam($userStorie->project->team);
+        return $user->belongsToTeam($userStory->project->team);
     }
 
     /**
@@ -34,33 +34,33 @@ class UserStoriePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, UserStorie $userStorie): bool
+    public function update(User $user, UserStory $userStory): bool
     {
-        return $user->is($userStorie->user)
-            || $user->is($userStorie->project->user);
+        return $user->is($userStory->user)
+            || $user->is($userStory->project->user);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, UserStorie $userStorie): bool
+    public function delete(User $user, UserStory $userStory): bool
     {
-        return $this->update($user, $userStorie);
+        return $this->update($user, $userStory);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, UserStorie $userStorie): bool
+    public function restore(User $user, UserStory $userStory): bool
     {
-        return $this->delete($user, $userStorie);
+        return $this->delete($user, $userStory);
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, UserStorie $userStorie): bool
+    public function forceDelete(User $user, UserStory $userStory): bool
     {
-        return $this->delete($user, $userStorie);
+        return $this->delete($user, $userStory);
     }
 }

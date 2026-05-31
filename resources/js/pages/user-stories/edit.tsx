@@ -9,7 +9,7 @@ import projects from '@/routes/projects';
 import { Project, UserStory } from '@/types';
 import { Form, Head, Link } from '@inertiajs/react';
 
-export default function UserStoryEdit({ project, user_storie }: { project: Project; user_storie: UserStory; }) {
+export default function UserStoryEdit({ project, user_story }: { project: Project; user_story: UserStory; }) {
     const currentTeam = useCurrentTeam();
 
     return (
@@ -26,7 +26,7 @@ export default function UserStoryEdit({ project, user_storie }: { project: Proje
                 /> */}
 
                 <Form
-                    {...projects.userStories.update.form({ current_team: currentTeam.slug, project: project.id, userStorie: user_storie.id })}
+                    {...projects.userStories.update.form({ current_team: currentTeam.slug, project: project.id, userStory: user_story.id })}
                     resetOnSuccess
                     disableWhileProcessing
                     className="flex flex-col gap-6"
@@ -45,14 +45,14 @@ export default function UserStoryEdit({ project, user_storie }: { project: Proje
                                         label="Story"
                                         description="Describe the user story in one or two sentences."
                                         placeholder="As a user, I want to..."
-                                        defaultValue={user_storie.story}
+                                        defaultValue={user_story.story}
                                     />
                                     <InputField
                                         name="status"
                                         type="select"
                                         label="Status"
                                         description="Select the current progress status for this story."
-                                        defaultValue={user_storie.status}
+                                        defaultValue={user_story.status}
                                         placeholder="Select status"
                                     >
                                         <SelectItem value="todo">Todo</SelectItem>
@@ -67,7 +67,7 @@ export default function UserStoryEdit({ project, user_storie }: { project: Proje
                                     Save changes
                                 </Button>
                                 <Button variant="outline" asChild disabled={processing} type="button">
-                                    <Link href={projects.userStories.show({ current_team: currentTeam.slug, project: project.id, userStorie: user_storie.id })} prefetch>
+                                    <Link href={projects.userStories.show({ current_team: currentTeam.slug, project: project.id, userStory: user_story.id })} prefetch>
                                         Cancel
                                     </Link>
                                 </Button>
@@ -80,7 +80,7 @@ export default function UserStoryEdit({ project, user_storie }: { project: Proje
     );
 }
 
-UserStoryEdit.layout = (props: { currentTeam?: { slug: string; } | null; project: Project; user_storie: UserStory; }) => ({
+UserStoryEdit.layout = (props: { currentTeam?: { slug: string; } | null; project: Project; user_story: UserStory; }) => ({
     breadcrumbs: [
         {
             title: 'Projects',
@@ -92,7 +92,7 @@ UserStoryEdit.layout = (props: { currentTeam?: { slug: string; } | null; project
         },
         {
             title: 'Edit story',
-            href: props.currentTeam ? projects.userStories.edit({ current_team: props.currentTeam.slug, project: props.project.id, userStorie: props.user_storie.id }) : home(),
+            href: props.currentTeam ? projects.userStories.edit({ current_team: props.currentTeam.slug, project: props.project.id, userStory: props.user_story.id }) : home(),
         },
     ],
 });

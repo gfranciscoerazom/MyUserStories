@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum UserStorieStatus: string
+enum UserStoryStatus: string
 {
     case TODO = 'todo';
     case IN_PROGRESS = 'in_progress';

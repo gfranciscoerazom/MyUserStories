@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Teams\TeamInvitationController;
-use App\Http\Controllers\UserStorieController;
+use App\Http\Controllers\UserStoryController;
 use App\Http\Middleware\EnsureTeamMembership;
 use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
@@ -22,11 +22,11 @@ Route::prefix('{current_team}')
         Route::put('projects/{project}', [ProjectController::class, 'update'])->name('projects.update')->middleware([HandlePrecognitiveRequests::class]);
         Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
-        Route::post('projects/{project}/user-stories', [UserStorieController::class, 'store'])->name('projects.user-stories.store')->middleware([HandlePrecognitiveRequests::class]);
-        Route::get('projects/{project}/user-stories/{userStorie}', [UserStorieController::class, 'show'])->name('projects.user-stories.show');
-        Route::get('projects/{project}/user-stories/{userStorie}/edit', [UserStorieController::class, 'edit'])->name('projects.user-stories.edit');
-        Route::put('projects/{project}/user-stories/{userStorie}', [UserStorieController::class, 'update'])->name('projects.user-stories.update')->middleware([HandlePrecognitiveRequests::class]);
-        Route::delete('projects/{project}/user-stories/{userStorie}', [UserStorieController::class, 'destroy'])->name('projects.user-stories.destroy');
+        Route::post('projects/{project}/user-stories', [UserStoryController::class, 'store'])->name('projects.user-stories.store')->middleware([HandlePrecognitiveRequests::class]);
+        Route::get('projects/{project}/user-stories/{userStory}', [UserStoryController::class, 'show'])->name('projects.user-stories.show');
+        Route::get('projects/{project}/user-stories/{userStory}/edit', [UserStoryController::class, 'edit'])->name('projects.user-stories.edit');
+        Route::put('projects/{project}/user-stories/{userStory}', [UserStoryController::class, 'update'])->name('projects.user-stories.update')->middleware([HandlePrecognitiveRequests::class]);
+        Route::delete('projects/{project}/user-stories/{userStory}', [UserStoryController::class, 'destroy'])->name('projects.user-stories.destroy');
     });
 
 Route::middleware(['auth'])->group(function () {

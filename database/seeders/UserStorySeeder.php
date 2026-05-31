@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
-use App\Models\UserStorie;
+use App\Models\UserStory;
 use Illuminate\Database\Seeder;
 
-class UserStorieSeeder extends Seeder
+class UserStorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class UserStorieSeeder extends Seeder
     public function run(): void
     {
         Project::all()->each(function (Project $project) {
-            UserStorie::factory()
+            UserStory::factory()
                 ->count(3)
                 ->for($project)
                 ->create([
