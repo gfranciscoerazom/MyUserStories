@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Teams\TeamInvitationController;
 use App\Http\Controllers\UserStoryController;
